@@ -131,6 +131,18 @@ public View onCreateView(
                 }
                 case DEVICE_NOT_FOUND: {
                     Log.d("FirstFragment", "DEVICE_NOT_FOUND");
+                    return;
+                }
+                case BLUETOOTH_NOT_CONNECTED: {
+                    Log.d("FirstFragment", "BLUETOOTH_NOT_CONNECTED");
+                    return;
+                }
+                case ALREADY_CONNECTED: {
+                    Log.d("FirstFragment", "ALREADY_CONNECTED");
+                    return;
+                }
+                case SCANNING: {
+                    Log.d("FirstFragment", "SCANNING");
                 }
             }
         }
@@ -211,10 +223,14 @@ public class FirstFragment extends Fragment {
         }
     };
 
+    private int loopInterval = 0;
     private void sendNotes() {
         Log.d(TAG, "::sendNotes");
-        for(int i = 0; i < 24; i++){
-            VisualnoteBle.getInstance().sendSingleLed(new LedPoint(i, 1, Fretboard.Finger.index));
+        VisualnoteBle.getInstance().sendSingleLed(new LedPoint(loopInterval, 1, Fretboard.Finger.index));
+
+        loopInterval += 1;
+        if (loopInterval > 21) {
+            loopInterval = 0;
         }
     }
 
@@ -270,6 +286,18 @@ public class FirstFragment extends Fragment {
                     }
                     case DEVICE_NOT_FOUND: {
                         Log.d("FirstFragment", "DEVICE_NOT_FOUND");
+                        return;
+                    }
+                    case BLUETOOTH_NOT_CONNECTED: {
+                        Log.d("FirstFragment", "BLUETOOTH_NOT_CONNECTED");
+                        return;
+                    }
+                    case ALREADY_CONNECTED: {
+                        Log.d("FirstFragment", "ALREADY_CONNECTED");
+                        return;
+                    }
+                    case SCANNING: {
+                        Log.d("FirstFragment", "SCANNING");
                     }
                 }
             }
